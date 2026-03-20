@@ -1,7 +1,7 @@
 import { faker } from "@faker-js/faker";
 import { expect, test } from "@playwright/test";
-import { BlogPage } from "../pages/BlogPage";
-import { NewsletterPage } from "../pages/NewsletterPage";
+import { BlogPage } from "../pages/BlogPage.js";
+import { NewsletterPage } from "../pages/NewsletterPage.js";
 
 test.describe("Newsletter - Blog do Agi", () => {
   let blogPage: BlogPage;
@@ -16,7 +16,7 @@ test.describe("Newsletter - Blog do Agi", () => {
   });
 
   test("assina newsletter com e-mail válido", async () => {
-    const local = faker.internet.username().replace(/[^a-zA-Z0-9]/g, "");
+    const local = faker.internet.userName().replace(/[^a-zA-Z0-9]/g, "");
     const email = `${local}.${Date.now()}@gmail.com`;
 
     await newsletterPage.subscribe(email);
@@ -28,7 +28,7 @@ test.describe("Newsletter - Blog do Agi", () => {
   });
 
   test("mostra erro de assinatura cancelada", async () => {
-    const local = faker.internet.username().replace(/[^a-zA-Z0-9]/g, "");
+    const local = faker.internet.userName().replace(/[^a-zA-Z0-9]/g, "");
     const email = `${local}.${Date.now()}@gmail.com`;
 
     await newsletterPage.subscribe(email);
@@ -63,7 +63,7 @@ test.describe("Newsletter - Blog do Agi", () => {
 
       await newsletterPage.subscribe(email);
 
-      const validity = await newsletterPage.emailInput.evaluate((el) => {
+      const validity = await newsletterPage.emailInput.evaluate((el: any) => {
         const input = el as HTMLInputElement;
         return {
           valid: input.checkValidity(),
