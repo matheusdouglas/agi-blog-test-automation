@@ -84,6 +84,7 @@ Cada página da aplicação é representada por uma classe, contendo seus elemen
 
 ```bash
 npm install
+npx playwright install
 ```
 
 ---
